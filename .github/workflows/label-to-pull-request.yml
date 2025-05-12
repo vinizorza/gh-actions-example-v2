@@ -1,4 +1,4 @@
-name: Greetings
+name: PR Labeler
 
 on:
   pull_request:
