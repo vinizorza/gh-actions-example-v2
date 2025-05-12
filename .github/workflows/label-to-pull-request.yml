@@ -1,0 +1,14 @@
+name: Greetings
+
+on: pull_request_target
+
+jobs:
+  needs-review:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - run: | 
+          gh pr edit ${{ github.event.pull_request.number }} -- add-labels "needs-review"
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
