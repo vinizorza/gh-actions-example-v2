@@ -15,6 +15,6 @@ jobs:
 
       - name: Add label to PR
         run: | 
-          gh pr edit ${{ github.event.pull_request.number }} -- add-labels "needs-review"
+          gh pr edit ${{ github.event.pull_request.number }} --add-label "needs-review"
         env:
             GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
