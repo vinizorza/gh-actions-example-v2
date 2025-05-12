@@ -1,6 +1,8 @@
-name: Greetings
+name: PR Labeler
 
-on: pull_request_target
+on:
+  pull_request:
+    types: [opened]
 
 jobs:
   needs-review:
@@ -8,7 +10,11 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - run: | 
-          gh pr edit ${{ github.event.pull_request.number }} -- add-labels "needs-review"
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Add label to PR
+        run: | 
+          gh pr edit ${{ github.event.pull_request.number }} --add-label "needs-review"
+        env:
+            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
